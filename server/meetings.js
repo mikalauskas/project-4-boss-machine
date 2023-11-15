@@ -5,6 +5,7 @@ const {
     getAllFromDatabase,
     deleteAllFromDatabase,
     createMeeting,
+    addToDatabase,
 } = require('./db');
 
 module.exports = meetingsRouter;
@@ -18,7 +19,8 @@ meetingsRouter.get('/', (req, res) => {
 
 // create a new minion and save it to the database
 meetingsRouter.post('/', (req, res) => {
-    res.status(201).send(createMeeting());
+    let newMeeting = addToDatabase('meetings', createMeeting());
+    res.status(201).send(newMeeting);
 });
 
 // delete a single minion by id
